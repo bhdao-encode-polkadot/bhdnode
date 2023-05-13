@@ -44,3 +44,19 @@ fn it_adds_members() {
 	});
 }
 
+#[test]
+fn it_uploads_a_document() {
+	new_test_ext().execute_with(|| {
+		// Go past genesis block so events get deposited
+		System::set_block_number(1);
+
+		// Add Contributor
+		assert_ok!(BhdaoModule::set_membership(RuntimeOrigin::root(),2,2,b"Contributor1".to_vec()));
+
+		// Contributor uploads a document
+
+		assert_ok!(BhdaoModule::upload_document(RuntimeOrigin::signed(2),b"Doc1".to_vec()));
+
+	});
+}
+
