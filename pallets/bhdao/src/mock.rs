@@ -1,5 +1,5 @@
 use crate as pallet_bhdao;
-use frame_support::traits::{ConstU16, ConstU64};
+use frame_support::traits::{ConstU16, ConstU32, ConstU64};
 use sp_core::H256;
 use sp_runtime::{
 	testing::Header,
@@ -48,8 +48,11 @@ impl frame_system::Config for Test {
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
 }
 
+pub const VOTING_WINDOW: u32 = 1000;
+
 impl pallet_bhdao::Config for Test {
 	type RuntimeEvent = RuntimeEvent;
+	type VotingWindow = ConstU32<VOTING_WINDOW>;
 }
 
 // Build genesis storage according to the mock runtime.

@@ -29,3 +29,18 @@ fn it_fails_for_join_dao() {
 	});
 }
 
+#[test]
+fn it_adds_members() {
+	new_test_ext().execute_with(|| {
+		// Go past genesis block so events get deposited
+		System::set_block_number(1);
+
+		// Add Qualifier
+		assert_ok!(BhdaoModule::set_membership(RuntimeOrigin::root(),1,1,b"Qualifier1".to_vec()));
+
+		// Add Contributor
+		assert_ok!(BhdaoModule::set_membership(RuntimeOrigin::root(),2,2,b"Contributor1".to_vec()));
+
+	});
+}
+
